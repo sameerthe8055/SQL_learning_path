@@ -132,7 +132,6 @@ SQL> -- 9 QUERY
 SQL> SELECT  *
   2  FROM EMP
   3  WHERE JOB = 'ANALYST' AND DEPTNO = 10;
-
 no rows selected
 
 SQL> SELECT * FROM EMP;

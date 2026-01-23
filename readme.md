@@ -1,0 +1,1 @@
+### This repo records all of my assignments while I learn SQL

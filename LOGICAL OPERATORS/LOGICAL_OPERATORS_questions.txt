@@ -1,0 +1,22 @@
+ASSIGNMENT ON LOGICAL OPERATORS
+
+1) WAQTD details of the employees working as CLERK and earning less than 1500
+2) WAQTD name and hiredate of the employees working as MANAGER in DEPT 30
+3) WAQTD details of the emp along with annual salary if they are working in DEPT 30 as SALESMAN and their annual salary has to be greater than 14000
+4) WAQTD all the details of the emp working in DEPT 30 or as ANALYST
+5) WAQTD names of the employees whose salary is less than 1100 and their designation is CLERK
+6) WAQTD name and sal, annual sal and deptno if deptno is 20 earning more than 1100 and annual salary exceeds 12000
+7) WAQTD empno and names of the employees working as MANAGER in DEPT 20
+8) WAQTD details of employees working in DEPT 20 or 30
+9) WAQTD details of employees working as ANALYST in DEPT 10
+10) WAQTD details of employee working as PRESIDENT with salary of rupees 4000
+11) WAQTD names and deptno, job of emps working as CLERK in DEPT 10 or 20
+12) WAQTD details of employees working as CLERK or MANAGER in DEPT 10
+13) WAQTD names of employees working in DEPT 10, 20, 30, 40
+14) WAQTD details of employees with EMPNO 7902, 7839
+15) WAQTD details of employees working as MANAGER or SALESMAN or CLERK
+16) WAQTD names of employees hired after 81 and before 87
+17) WAQTD details of employees earning more than 1250 but less than 3000
+18) WAQTD names of employees hired after 81 into DEPT 10 or 30
+19) WAQTD names of employees along with annual salary for the employees working as MANAGER or CLERK into DEPT 10 or 30
+20) WAQTD all the details along with annual salary if SAL is between 1000 and 4000 and annual salary more than 15000
