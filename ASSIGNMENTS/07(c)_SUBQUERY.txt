@@ -1,0 +1,208 @@
+SQL> -- ASSIGNMENT ON TYPES OF SUBQUERY
+SQL> -- 51. WAQTD NAME OF THE EMPLOYEES EARNING SALARY MORE THAN THE SALESMAN
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE SAL > ( SELECT  MAX(SAL)
+  4  FROM EMP
+  5  WHERE JOB = 'SALESMAN');
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+JONES                                                                                                                                                                                                   
+BLAKE                                                                                                                                                                                                   
+CLARK                                                                                                                                                                                                   
+SCOTT                                                                                                                                                                                                   
+KING                                                                                                                                                                                                    
+FORD                                                                                                                                                                                                    
+
+6 rows selected.
+
+SQL> -- 52. WAQTD DETAILS OF THE EMPLOYEES HIRED AFTER ALL THE CLERKS
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE HIREDATE > (SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'CLERK');
+
+no rows selected
+
+SQL> -- 53. WAQTD NAME AND SALARY OF ALL THE EMPLOYEES IF THEY ARE EARNING LESS THAN AT LEAST A MANAGER
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE SAL < (SELECT MIN(SAL)
+  4  FROM EMP
+  5  WHERE JOB = 'MANAGER');
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+SMITH             800                                                                                                                                                                                   
+ALLEN            1600                                                                                                                                                                                   
+WARD             1250                                                                                                                                                                                   
+MARTIN           1250                                                                                                                                                                                   
+TURNER           1500                                                                                                                                                                                   
+ADAMS            1100                                                                                                                                                                                   
+JAMES             950                                                                                                                                                                                   
+MILLER           1300                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> -- 54. WAQTD NAME AND HIREDATE OF EMPLOYEES HIRED BEFORE ALL THE MANAGERS
+SQL> SELECT ENAME, HIREDATE
+  2  FROM EMP
+  3  WHERE HIREDATE < ( SELECT MIN(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'MANAGER');
+
+ENAME      HIREDATE                                                                                                                                                                                     
+---------- ---------                                                                                                                                                                                    
+SMITH      17-DEC-80                                                                                                                                                                                    
+ALLEN      20-FEB-81                                                                                                                                                                                    
+WARD       22-FEB-81                                                                                                                                                                                    
+
+SQL> -- 55. WAQTD NAMES OF THE EMPLOYEES HIRED AFTER ALL THE MANAGERS AND EARNING SALARY MORE THAN ALL THE CLERKS
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE HIREDATE > ( SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'MANAGER') AND SAL > ( SELECT MAX(SAL)
+  6  FROM EMP
+  7* WHERE JOB = 'CLERKS');
+SQL> /
+WHERE JOB = 'CLERKS');
+                     *
+ERROR at line 7:
+ORA-00911: invalid character 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE HIREDATE > ( SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'MANAGER') AND SAL > ( SELECT MAX(SAL)
+  6  FROM EMP
+  7* WHERE JOB = 'CLERK');
+SQL> /
+WHERE JOB = 'CLERK');
+                    *
+ERROR at line 7:
+ORA-00911: invalid character 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE HIREDATE > ( SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'MANAGER') AND SAL > ( SELECT MAX(SAL)
+  6  FROM EMP
+  7* WHERE JOB = 'CLERK')
+SQL> /
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+SCOTT                                                                                                                                                                                                   
+KING                                                                                                                                                                                                    
+TURNER                                                                                                                                                                                                  
+FORD                                                                                                                                                                                                    
+
+SQL> -- 56. WAQTD DETAILS OF THE EMPLOYEES WORKING AS CLERK AND HIRED BEFORE AT LEAST A SALESMAN
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB = 'CLERK' AND HIREDATE < (SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE JOB = 'SALESMAN');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+
+SQL> -- 57. WAQTD DETAILS OF EMPLOYEES WORKING IN ACCOUNTING OR SALES DEPT
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN ( SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE DNAME IN ('ACCOUNTING', 'SALES');
+WHERE DNAME IN ('ACCOUNTING', 'SALES')
+                                     *
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN ( SELECT DEPTNO
+  4  FROM DEPT
+  5* WHERE DNAME IN ('ACCOUNTING', 'SALES'))
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+9 rows selected.
+
+SQL> -- 58. WAQTD DEPARTMENT NAMES OF THE EMPLOYEES WITH NAME SMITH, KING AND MILLER
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DEPTNO IN ( SELECT DEPTNO
+  4  FROM EMP
+  5  WHERE ENAME IN ('SMITH', 'KING', 'MILLER'));
+
+DNAME                                                                                                                                                                                                   
+--------------                                                                                                                                                                                          
+ACCOUNTING                                                                                                                                                                                              
+RESEARCH                                                                                                                                                                                                
+
+SQL> -- 59. WAQTD DETAILS OF EMPLOYEES WORKING IN NEW YORK OR CHICAGO
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN ( SELECT DEPTNO
+  4  FROM DEPT
+  5  WHERE LOC IN ('NEW YORK', 'CHICAGO'));
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+9 rows selected.
+
+SQL> -- 60. WAQTD EMP NAMES IF EMPLOYEES ARE HIRED AFTER ALL THE EMPLOYEES OF DEPT 10
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE HIREDATE > ( SELECT MAX(HIREDATE)
+  4  FROM EMP
+  5  WHERE DEPTNO = 10);
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+SCOTT                                                                                                                                                                                                   
+ADAMS                                                                                                                                                                                                   
+
+SQL> SPOOL OFF
