@@ -1,3 +1,13 @@
+SQL> SELECT *
+  2  FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
 SQL> SELECT * FROM EMP;
 
      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
@@ -19,16 +29,6 @@ SQL> SELECT * FROM EMP;
 
 14 rows selected.
 
-
-SQL> SELECT *
-  2  FROM TAB;
-
-TNAME                          TABTYPE  CLUSTERID
------------------------------- ------- ----------
-DEPT                           TABLE
-EMP                            TABLE
-BONUS                          TABLE
-SALGRADE                       TABLE
 
 SQL> SELECT * FROM DEPT;
 
